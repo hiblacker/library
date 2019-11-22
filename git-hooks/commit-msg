@@ -1,0 +1,14 @@
+#!/bin/sh
+# 获取当前分支名字
+BRANCH_NAME=$(git symbolic-ref --short -q HEAD)
+# 将分支名字按／进行分割
+TEMP_ARR=(`echo $BRANCH_NAME | tr '/' ' '`)
+# 获取到第一个元素
+PRE_BRANCH=${TEMP_ARR[0]}
+# 获取你输入的git commit 内容
+ORIGIN_COMMIT=$(cat $1)
+# 将分支信息和原始commit进行拼接
+COMMIT="[OCar-收益中心-H5]($PRE_BRANCH)  ${ORIGIN_COMMIT}"
+echo "修改后的提交信息：$COMMIT"
+# 输出commit信息
+echo "$COMMIT" > "$1"
